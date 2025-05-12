@@ -1,5 +1,6 @@
 {
   "name": "vite_bundler",
+  "homepage": "https://kaa-it-js.github.io/react-burger-js-starter/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -17,7 +18,9 @@
     "preview": "vite preview",
     "stylelint": "stylelint \"src/**/*.css\" --fix",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@babel/runtime": "^7.25.4",
@@ -26,7 +29,8 @@
     "lodash-es": "^4.17.21",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^7.6.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
@@ -54,6 +58,7 @@
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-refresh": "^0.4.19",
     "eslint-plugin-unused-imports": "^4.1.4",
+    "gh-pages": "^6.3.0",
     "globals": "^16.1.0",
     "husky": "^9.1.7",
     "jsdom": "^26.0.0",
