@@ -1,5 +1,5 @@
 import { Tab } from '@ya.praktikum/react-developer-burger-ui-components';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 
 import { ingredientPropType } from '@utils/prop-types.js';
 

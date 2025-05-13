@@ -1,5 +1,4 @@
-import * as PropTypes from 'prop-types';
-import React from 'react';
+import PropTypes from 'prop-types';
 
 import { ingredientPropType } from '@utils/prop-types.js';
 

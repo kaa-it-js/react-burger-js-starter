@@ -36,5 +36,5 @@
   "include": ["src", "vitest-setup.js"],
   "exclude": ["cypress"],
   "references": [{ "path": "./tsconfig.node.json" }],
-  "types": ["@testing-library/jest-dom"]
+  "types": ["@testing-library/jest-dom/vitest"]
 }
