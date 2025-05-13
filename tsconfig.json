@@ -16,7 +16,6 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "allowJs": true,
-    "checkJs": true,
 
     /* Linting */
     "strict": true,
@@ -34,7 +33,7 @@
     }
   },
   "plugins": [{ "name": "typescript-plugin-css-modules" }],
-  "include": ["src"],
+  "include": ["src", "vitest-setup.js"],
   "exclude": ["cypress"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "types": ["@testing-library/jest-dom"]

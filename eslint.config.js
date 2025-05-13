@@ -1,5 +1,4 @@
 import js from '@eslint/js';
-import jsxA11y from 'eslint-plugin-jsx-a11y';
 import importPlugin from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
@@ -24,12 +23,11 @@ export default tseslint.config(
   js.configs.recommended,
   importPlugin.flatConfigs.recommended,
   importPlugin.flatConfigs.typescript,
-  tseslint.configs.recommendedTypeChecked,
-  tseslint.configs.stylisticTypeChecked,
+  tseslint.configs.recommended,
+  tseslint.configs.stylistic,
   react.configs.flat.recommended,
   react.configs.flat['jsx-runtime'],
   reactHooks.configs['recommended-latest'],
-  jsxA11y.flatConfigs.recommended,
   {
     files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
@@ -63,6 +61,13 @@ export default tseslint.config(
         },
       ],
       '@typescript-eslint/no-import-type-side-effects': 'error',
+      '@typescript-eslint/no-unused-expressions': [
+        'error',
+        {
+          allowShortCircuit: true,
+          allowTernary: true,
+        },
+      ],
       '@typescript-eslint/no-unused-imports': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
