@@ -33,7 +33,7 @@
     }
   },
   "plugins": [{ "name": "typescript-plugin-css-modules" }],
-  "include": ["src", "vitest-setup.js"],
+  "include": ["src"],
   "exclude": ["cypress"],
   "references": [{ "path": "./tsconfig.node.json" }],
   "types": ["@testing-library/jest-dom/vitest"]
