@@ -8,9 +8,13 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
+build
 dist
 dist-ssr
+storybook-static
 *.local
+
+*module.css.d.ts
 
 # Editor directories and files
 .vscode/*

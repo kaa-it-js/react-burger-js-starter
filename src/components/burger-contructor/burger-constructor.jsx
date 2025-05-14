@@ -1,14 +1,15 @@
-import React from 'react';
-import styles from './burger-constructor.module.css';
-import * as PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
+
 import { ingredientPropType } from '@utils/prop-types.js';
 
-export const BurgerConstructor = ({ ingredients }) => {
-	console.log(ingredients);
+import styles from './burger-constructor.module.css';
 
-	return <section className={styles.burger_constructor}></section>;
+export const BurgerConstructor = ({ ingredients }) => {
+  console.log(ingredients);
+
+  return <section className={styles.burger_constructor}></section>;
 };
 
 BurgerConstructor.propTypes = {
-	ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
+  ingredients: PropTypes.arrayOf(ingredientPropType.isRequired).isRequired,
 };
