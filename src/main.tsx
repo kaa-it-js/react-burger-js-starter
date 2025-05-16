@@ -6,7 +6,7 @@ import { App } from '@components/app/app.tsx';
 
 import './index.css';
 
-createRoot(document.getElementById('root')).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <HashRouter>
       <App />
