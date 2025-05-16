@@ -6,9 +6,14 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import unusedImports from 'eslint-plugin-unused-imports';
 import globals from 'globals';
+import path from 'path';
 import tseslint from 'typescript-eslint';
+import { fileURLToPath } from 'url';
 
-export default tseslint.config(
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+// Общие настройки для всех файлов
+export default tseslint.config([
   {
     ignores: [
       '*.config.*',
@@ -21,43 +26,130 @@ export default tseslint.config(
     ],
   },
   js.configs.recommended,
-  importPlugin.flatConfigs.recommended,
-  importPlugin.flatConfigs.typescript,
   tseslint.configs.recommended,
   tseslint.configs.stylistic,
+  importPlugin.flatConfigs.recommended,
+  importPlugin.flatConfigs.typescript,
   react.configs.flat.recommended,
   react.configs.flat['jsx-runtime'],
   reactHooks.configs['recommended-latest'],
   {
-    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
-      parser: tseslint.parser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        project: './tsconfig.json',
-        projectService: true,
-        sourceType: 'module',
-        tsconfigRootDir: import.meta.dirname,
-        warnOnUnsupportedTypeScriptVersion: false,
-      },
       globals: globals.browser,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+      },
+      sourceType: 'module',
     },
     plugins: {
       react,
       'react-refresh': reactRefresh,
-      '@typescript-eslint': tseslint.plugin,
       'unused-imports': unusedImports,
     },
     rules: {
+      'import/order': [
+        'error',
+        {
+          alphabetize: {
+            order: 'asc',
+            caseInsensitive: false,
+          },
+          'newlines-between': 'always',
+          groups: [
+            'builtin',
+            'external',
+            'internal',
+            'parent',
+            'sibling',
+            'index',
+            'type',
+          ],
+          pathGroups: [
+            {
+              pattern: './*.css',
+              group: 'sibling',
+              position: 'after',
+            },
+          ],
+          warnOnUnassignedImports: true,
+        },
+      ],
+    },
+    settings: {
+      react: {
+        version: 'detect',
+      },
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json',
+        },
+        alias: {
+          map: [
+            ['@', path.resolve(__dirname, './src')],
+            ['@components', path.resolve(__dirname, './src/components')],
+            ['@services', path.resolve(__dirname, './src/utils')],
+            ['@pages', path.resolve(__dirname, './src/pages')],
+            ['@utils', path.resolve(__dirname, './src/utils')],
+          ],
+          extensions: ['.js', '.jsx', '.ts', '.tsx'],
+        },
+      },
+    },
+  },
+
+  // Конфигурация для JavaScript файлов (.js, .jsx)
+  {
+    files: ['**/*.{js,jsx}'],
+    rules: {
       'no-unused-vars': 'off',
+      'import/no-unresolved': 'error',
+      'import/no-unused-modules': 'error',
+      'react/prop-types': 'off',
+      'react/jsx-uses-react': 'error',
+      'react/jsx-uses-vars': 'error',
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+      'unused-imports/no-unused-imports': 'error',
+      'unused-imports/no-unused-vars': 'error',
+    },
+  },
+  // Конфигурация для TypeScript файлов (.ts, .tsx)
+  {
+    files: ['**/*.{ts,tsx}'],
+    ...tseslint.configs.recommendedTypeCheckedOnly.rules,
+    ...tseslint.configs.stylisticTypeCheckedOnly.rules,
+    languageOptions: {
+      parser: tseslint.parser,
+      parserOptions: {
+        ecmaFeatures: { jsx: true },
+        project: './tsconfig.json',
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+        warnOnUnsupportedTypeScriptVersion: false,
+      },
+    },
+    plugins: {
+      '@typescript-eslint': tseslint.plugin,
+    },
+    rules: {
+      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/consistent-type-imports': [
         'error',
         {
           disallowTypeAnnotations: true,
           fixStyle: 'separate-type-imports',
           prefer: 'type-imports',
+        },
+      ],
+      '@typescript-eslint/explicit-function-return-type': 'error',
+      '@typescript-eslint/explicit-module-boundary-types': 'error',
+      '@typescript-eslint/no-explicit-any': 'error',
+      '@typescript-eslint/no-inferrable-types': [
+        'error',
+        {
+          ignoreParameters: false,
+          ignoreProperties: false,
         },
       ],
       '@typescript-eslint/no-import-type-side-effects': 'error',
@@ -69,6 +161,7 @@ export default tseslint.config(
         },
       ],
       '@typescript-eslint/no-unused-imports': 'off',
+      'unused-imports/no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': [
         'error',
         {
@@ -79,57 +172,14 @@ export default tseslint.config(
           varsIgnorePattern: '^_',
         },
       ],
-      '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
-      'import/no-unresolved': 'error',
-      'import/no-unused-modules': 'error',
-      'import/order': [
-        'error',
-        {
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: false,
-          },
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'type',
-          ],
-          'newlines-between': 'always',
-          pathGroups: [
-            {
-              pattern: './*.css',
-              group: 'sibling',
-              position: 'after',
-            },
-          ],
-          warnOnUnassignedImports: true,
-        },
-      ],
-      'react/prop-types': 'off',
-      'react/jsx-uses-react': 'error',
-      'react/jsx-uses-vars': 'error',
-      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
-      'unused-imports/no-unused-imports': 'error',
-      'unused-imports/no-unused-vars': 'off',
     },
     settings: {
-      react: {
-        version: 'detect',
-      },
       'import/resolver': {
-        node: {
-          extensions: ['.ts', '.tsx', '.js', '.jsx', '.d.ts'],
-        },
         typescript: {
-          alwaysTryTypes: true,
           project: './tsconfig.json',
         },
       },
     },
   },
-  eslintPluginPrettierRecommended
-);
+  eslintPluginPrettierRecommended,
+]);

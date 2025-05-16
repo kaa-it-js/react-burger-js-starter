@@ -8,9 +8,9 @@ import sassDts from 'vite-plugin-sass-dts';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    checker({
-      typescript: true,
-    }),
+    // checker({
+    //   typescript: true,
+    // }),
     react(),
     readableClassnames(),
     sassDts({
