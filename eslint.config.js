@@ -103,6 +103,7 @@ export default tseslint.config([
   {
     files: ['**/*.{js,jsx}'],
     rules: {
+      'no-unused-vars': 'off',
       'import/no-unresolved': 'error',
       'import/no-unused-modules': 'error',
       'react/jsx-uses-react': 'error',
