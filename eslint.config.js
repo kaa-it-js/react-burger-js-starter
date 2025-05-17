@@ -106,7 +106,6 @@ export default tseslint.config([
       'no-unused-vars': 'off',
       'import/no-unresolved': 'error',
       'import/no-unused-modules': 'error',
-      'react/prop-types': 'off',
       'react/jsx-uses-react': 'error',
       'react/jsx-uses-vars': 'error',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
@@ -133,6 +132,7 @@ export default tseslint.config([
       '@typescript-eslint': tseslint.plugin,
     },
     rules: {
+      'react/prop-types': 'off',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/consistent-type-imports': [
         'error',
