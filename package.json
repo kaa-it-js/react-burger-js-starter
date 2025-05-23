@@ -76,15 +76,15 @@
     "vitest": "^3.0.9"
   },
   "lint-staged": {
-    "**/*.css": [
+    "./src/**/*.css": [
       "stylelint --fix",
       "prettier --write"
     ],
-    "**/*.{js,jsx,ts,tsx}": [
+    "./src/**/*.{js,jsx,ts,tsx}": [
       "eslint --fix",
       "prettier --write"
     ],
-    "**/*.{json,html,md}": "prettier --write"
+    "./src/**/*.{json,html,md}": "prettier --write"
   },
   "config": {
     "commitizen": {
