@@ -75,6 +75,7 @@ export default tseslint.config([
           warnOnUnassignedImports: true,
         },
       ],
+      'react/prop-types': 'off',
     },
     settings: {
       react: {
@@ -98,7 +99,6 @@ export default tseslint.config([
       },
     },
   },
-
   // Конфигурация для JavaScript файлов (.js, .jsx)
   {
     files: ['**/*.{js,jsx}'],
@@ -131,7 +131,6 @@ export default tseslint.config([
       '@typescript-eslint': tseslint.plugin,
     },
     rules: {
-      'react/prop-types': 'off',
       '@typescript-eslint/consistent-type-definitions': ['error', 'type'],
       '@typescript-eslint/consistent-type-imports': [
         'error',
