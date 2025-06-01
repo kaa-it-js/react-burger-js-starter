@@ -1,7 +1,7 @@
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
-import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import perfectionist from 'eslint-plugin-perfectionist';
+import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -71,6 +71,7 @@ export default tseslint.config([
           newlinesBetween: 'always',
         },
       ],
+      'react/jsx-uses-react': 'off',
       'react/prop-types': 'off',
     },
     settings: {
@@ -78,19 +79,12 @@ export default tseslint.config([
         version: 'detect',
       },
       'import/resolver': {
+        node: {
+          extensions: ['.ts', '.tsx', '.js', '.jsx', '.d.ts'],
+        },
         typescript: {
           alwaysTryTypes: true,
           project: './tsconfig.json',
-        },
-        alias: {
-          map: [
-            ['@', path.resolve(__dirname, './src')],
-            ['@components', path.resolve(__dirname, './src/components')],
-            ['@services', path.resolve(__dirname, './src/utils')],
-            ['@pages', path.resolve(__dirname, './src/pages')],
-            ['@utils', path.resolve(__dirname, './src/utils')],
-          ],
-          extensions: ['.js', '.jsx', '.ts', '.tsx'],
         },
       },
     },
@@ -102,7 +96,6 @@ export default tseslint.config([
       'no-unused-vars': 'off',
       'import/no-unresolved': 'error',
       'import/no-unused-modules': 'error',
-      'react/jsx-uses-react': 'off',
       'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'unused-imports/no-unused-imports': 'error',
       'unused-imports/no-unused-vars': 'error',
