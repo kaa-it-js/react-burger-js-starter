@@ -1,6 +1,7 @@
 import js from '@eslint/js';
 import importPlugin from 'eslint-plugin-import';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
+import perfectionist from 'eslint-plugin-perfectionist';
 import react from 'eslint-plugin-react';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
@@ -43,36 +44,31 @@ export default tseslint.config([
       sourceType: 'module',
     },
     plugins: {
+      perfectionist,
       react,
       'react-refresh': reactRefresh,
       'unused-imports': unusedImports,
     },
     rules: {
-      'import/order': [
+      'import/order': 'off',
+      'perfectionist/sort-imports': [
         'error',
         {
-          alphabetize: {
-            order: 'asc',
-            caseInsensitive: false,
-          },
-          'newlines-between': 'always',
+          type: 'alphabetical',
+          order: 'asc',
           groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-            'type',
+            'value-builtin',
+            'value-external',
+            ['value-internal', 'value-parent', 'value-sibling'],
+            'type-import',
+            'type-internal',
+            ['type-parent', 'type-sibling', 'type-index'],
+            'ts-equals-import',
+            'side-effect-style',
+            'style',
           ],
-          pathGroups: [
-            {
-              pattern: './*.css',
-              group: 'sibling',
-              position: 'after',
-            },
-          ],
-          warnOnUnassignedImports: true,
+          internalPattern: ['^@components/', '^@services/', '^@pages/', '^@utils/'],
+          newlinesBetween: 'always',
         },
       ],
       'react/prop-types': 'off',
