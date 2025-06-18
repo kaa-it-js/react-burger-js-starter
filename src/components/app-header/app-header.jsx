@@ -3,7 +3,7 @@ import {
   ListIcon,
   ProfileIcon,
   Logo,
-} from '@ya.praktikum/react-developer-burger-ui-components';
+} from '@krgaa/react-developer-burger-ui-components';
 
 import styles from './app-header.module.css';
 
