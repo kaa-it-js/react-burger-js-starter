@@ -1,7 +1,7 @@
 /** @type {import("prettier").Config} */
 const config = {
   endOfLine: 'lf',
-  jsxSingleQuote: true,
+  jsxSingleQuote: false,
   printWidth: 89,
   semi: true,
   singleQuote: true,
